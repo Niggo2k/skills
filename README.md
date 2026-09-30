@@ -48,3 +48,38 @@ The refined prompt tells the agent to audit the current sidebar and its design-s
 ## Install
 
 Copy the `coding-agent-prompt-refiner/` folder into `~/.claude/skills/` for all projects, or into a project's `.claude/skills/` for one project.
+
+## Auto-install prompt
+
+Paste this into Claude Code or Codex. It installs the skill for both tools and adds a rule to your global `CLAUDE.md` and `AGENTS.md` so the agent refines every code-change request before working on it.
+
+````text
+Install the coding-agent-prompt-refiner skill and make it the first step for code-change requests.
+
+1. Install the skill
+   - Clone https://github.com/Niggo2k/skills into a temporary folder.
+   - Copy its `coding-agent-prompt-refiner/` folder to `~/.agents/skills/coding-agent-prompt-refiner/` (Codex).
+   - Make it available to Claude Code at `~/.claude/skills/coding-agent-prompt-refiner/`. Use a symlink to the `~/.agents/skills` copy if that is how other skills are set up there, otherwise copy the folder.
+   - If either target already exists, show me the differences and ask before overwriting.
+   - Delete the temporary clone.
+
+2. Add the rule to my global instruction files
+   - Files: `~/.claude/CLAUDE.md` (Claude Code) and `~/.codex/AGENTS.md` (Codex). Create a file if it does not exist.
+   - If a "## Prompt Refinement" section already exists in a file, leave that file unchanged.
+   - Otherwise append this section exactly, without changing anything else in the file:
+
+   ```md
+   ## Prompt Refinement
+
+   Before working on any request to change code (feature, fix, redesign, refactor, UI change), run the `coding-agent-prompt-refiner` skill on my original prompt. Show me the refined prompt, then carry out the refined prompt instead of the original.
+
+   Example: "Please redesign this element" becomes a prompt with a goal, what to audit first, concrete UI requirements, what must stay unchanged, acceptance criteria, and verification steps. You then implement that prompt.
+
+   Skip this for questions, one-line mechanical edits, and git or PR commands.
+   ```
+
+3. Verify and report
+   - Confirm `SKILL.md` exists at both skill paths.
+   - Confirm each instruction file contains exactly one "## Prompt Refinement" section.
+   - List every file you created, changed, or skipped. Tell me the rule takes effect in new sessions.
+````

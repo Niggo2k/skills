@@ -1,0 +1,23 @@
+{
+  "skill_name": "auto-commit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Please commit me the new staged changes by its functionality and implementation",
+      "expected_output": "Separate commits for the total() qty bug fix and the applyDiscount feature, Conventional Commits style matching history, debug console.log and package.json edit left unstaged, notes.txt left untracked.",
+      "files": ["fixture: mixed-partial (make_fixture.sh)"]
+    },
+    {
+      "id": 2,
+      "prompt": "commit my staged stuff, split it up by what each change does",
+      "expected_output": "Separate commits for the fmt->formatDate rename and the .editorconfig addition, plain imperative sentence subjects matching history (no type: prefix), app.js edit left unstaged, debug.log untracked.",
+      "files": ["fixture: plain-history (make_fixture.sh)"]
+    },
+    {
+      "id": 3,
+      "prompt": "Please commit me the new staged changes by its functionality and implementation",
+      "expected_output": "Nothing is staged, so no commits are made and the agent says so. Unstaged a.txt edit and untracked b.txt stay as they are.",
+      "files": ["fixture: nothing-staged (make_fixture.sh)"]
+    }
+  ]
+}
